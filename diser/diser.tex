@@ -1,0 +1,169 @@
+\documentclass[a4paper,14pt]{extreport}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ukrainian]{babel}
+
+\usepackage[unicode]{hyperref}
+\hypersetup{colorlinks=false}
+
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{listings}
+\lstset{frame=single,basicstyle=\ttfamily\scriptsize,extendedchars=\true}
+
+\usepackage{amssymb}
+
+\newtheorem{lemma}{Лема}
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Твердження}
+
+\usepackage{multirow}
+\usepackage{array}
+
+% maybe unused
+\usepackage{longtable}
+
+\usepackage{zvit}
+
+% for literature
+\usepackage{datetime}
+\renewcommand{\dateseparator}{.}
+\newcommand{\todayiso}{10.11.2018}
+
+\usepackage{bibspacing-report}
+\setlength{\bibspacing}{\baselineskip}
+
+
+% --- Zvit Settings -----
+
+\NirOrgLongName{Національна академія наук України
+
+Повна назва організації
+
+12345, Офіційна адреса
+
+тел. (044) 123-45-67} %% 
+
+\NirBoss{Директор Інституту Назва \newline
+ НАН України \newline
+академік НАН України}{ПІБ директора} 
+\NirManager{доктор фізико-математичних наук, професор}{ПІБ Керівника} 
+
+
+\NirYear{2018}
+\NirTown{м. Київ,} 
+ 
+\NirDate{~~~ 2018 р.}
+
+
+\NirUdk{519.713}
+\NirGosNo{№ держреєстрації 0000U000001}
+
+\NirStage{не використовується}{заключний}{}
+
+
+
+\begin{document}
+
+\usefont{T2A}{ftm}{m}{n} 
+
+% Add C. to start of contents
+\cftaddtitleline{toc}{part}{}{С.}
+
+\frontmatter 
+
+% Title page
+\thispagestyle{empty}
+
+УДК \quad 000.000.00
+
+ \begin{centering}
+  \linespread{1.1}
+  \vspace{2em}
+
+{Національна академія наук України
+
+Назва інституту}
+
+  \vspace{5em}
+
+ПРІЗВИЩЕ Ім'я По-батькові
+
+  \vspace{2em}
+
+Розвиток архітектури та методів автоматичної компіляції дисертацій
+
+у середовищі Latex
+
+  \vspace{5em}
+
+
+Дисертація 
+
+на здобуття наукового ступеня кандидата технічних наук
+
+за спеціальністю 05.13.05 -- комп'ютерні системи та компоненти
+
+
+  \vspace{2em}
+
+\textit{Науковий керівник}
+
+доктор фізико-математичних наук
+
+професор
+
+ПІБ Керівника
+
+\vspace{11em}
+
+  Київ -- 2018
+
+ \end{centering}
+\begin{flushright}
+ На правах рукопису
+\end{flushright} 
+% End of Titlepage
+
+\tableofcontents
+
+\input{abreviations.tex}
+
+\input{chapter-introduction.tex}
+
+\mainmatter %% это включает нумерацию глав и секций в документе ниже
+
+\input{chapter-theory-overview.tex}
+
+\backmatter
+
+\input{chapter-conclusion.tex}
+
+
+\mainmatter
+
+\clearpage
+\addcontentsline{toc}{chapter}{ПЕРЕЛІК ПОСИЛАНЬ}
+\bibliographystyle{gost780}
+% \bibliographystyle{unsrt}
+% \bibliographystyle{plain}
+\bibliography{literatura}
+
+\appendix
+
+%Fix Cyrillic letters in appendix numbering
+\makeatletter
+% Fix Title format
+\gdef\thechapter{\@Asbuk\c@chapter}
+\makeatother
+\titleformat{\chapter}
+  {\normalfont \centering}
+  {ДОДАТОК~\Asbuk{chapter}~}{0pt}{}
+\titlespacing{\chapter}{0cm}{0em}{3em}
+
+\input{appendix-module-for-statistics-gather.tex}
+\input{appendix-acts-of-intruduction.tex}
+
+\end{document}

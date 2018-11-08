@@ -1,0 +1,304 @@
+\ProvidesPackage{zvit}[2010/11/01 v1.00 Package for zvit]
+
+\RequirePackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1cm}
+\geometry{top=2cm}
+\geometry{bottom=2.5cm}
+
+\RequirePackage{setspace}
+
+% Paragraph tuning
+\onehalfspacing 
+
+\parindent=1.2cm
+% Тюнинг абзаца
+\widowpenalty = 500 % отвечает за нежелательность разрыва страницы перед последней строкой абзаца
+\clubpenalty = 500 % отвечает за нежелательность разрыва страницы после первой строки абзаца.
+\pretolerance=500
+\sloppy
+\tolerance=1100 % Tolerate lines with many spaces
+\setlength{\emergencystretch}{3em}
+
+% Hypenation tuning
+\hyphenpenalty=50
+\finalhyphendemerits=100
+\uchyph=0 % Запрет переноса слов начинающихся с большой буквы
+
+\addto\captionsukrainian{%список использованных источников
+ \def\bibname{%
+  ПЕРЕЛІК ПОСИЛАНЬ}%
+  \def\contentsname{%
+  ЗМІСТ}%
+}
+
+%Мікропідкручування шрифтів, зазорів щоб прибрати частину underfull, overfull box
+\RequirePackage{microtype}
+%Якось слабо допомагає
+
+% Стандартизація itemize
+\renewenvironment{itemize}%
+  {\begin{list}{--}%
+     {\topsep=0in\itemsep=0in\parsep=0in\partopsep=0in\usecounter{enumi}}%
+   }{\end{list}}
+
+% redefine enumerate, itemize for closer spacing
+\renewenvironment{enumerate}%
+  {\begin{list}{\arabic{enumi}.}%
+     {\topsep=0in\itemsep=0in\parsep=0in\partopsep=0in\usecounter{enumi}}%
+   }{\end{list}}
+
+
+
+%Элементы оформления титульной страницы
+\newcommand\Nir@UdkName{УДК}
+
+\newcommand\Nir@No{%
+ \No~держ. реєстрації
+}
+
+\newcommand\Nir@Confirm{
+ {\textbf{ЗАТВЕРДЖУЮ}}%
+}
+
+\newcommand\Nir@InventarNo{
+ Інв. № 
+}
+
+\newcommand\Nir@Otchet{%
+КВАЛІФІКАЦІЙНА РОБОТА
+
+НА ЗДОБУТТЯ НАУКОВОГО СТУПЕНЯ КАНДИДАТА ТЕХНІЧНИХ НАУК
+}
+
+\newcommand\Nir@AnnOtchet{ %отчёт аннотационный!?
+}
+
+\newcommand\Nir@MainBegin{%
+ Керівник
+}
+
+\newcommand\Nir@OrgLongName{%
+Повна назва організації 
+}
+
+\newcommand\Nir@StageNo{ % номер этапа работ
+}
+
+\newcommand\Nir@StageTitle{ % заголовок этапа работ
+}
+\newcommand\Nir@StageType{ % вид отчёта
+}
+
+
+\newcommand\Nir@BossPost{%
+ \CYRK\cyrt\cyro \newline
+ \cyru\cyrt\cyrv\cyre\cyrr\cyrzh\cyrd\cyra\cyre\cyrt%
+}
+
+\newcommand\Nir@BossName{\CYRF.~\CYRI.~\CYRO}
+\newcommand\Nir@Year{\the\year}
+\newcommand\Nir@Date{End date}
+\newcommand\Nir@Town{\CYRG\cyro\cyrr\cyro\cyrd}
+\newcommand\Nir@ManagerPost{%
+ \cyrb\cyro\cyrl\cyrsftsn\cyrsh\cyro\cyrishrt{}
+ \cyrn\cyra\cyrch\cyra\cyrl\cyrsftsn\cyrn\cyri\cyrk%
+}
+
+\newcommand\Nir@ManagerName{\CYRI\cyrv\cyra\cyrn\cyro\cyrv}
+
+\newcommand\NirTitle[1]{ 
+\thispagestyle{empty}
+% \begin{tabular}{p{0.05\linewidth}p{0.8\linewidth}}
+% УДК & \Nir@UdkName \\
+% \end{tabular}
+
+УДК \quad \Nir@UdkName
+
+% КП
+
+\Nir@No
+
+\Nir@InventarNo
+\vspace{2em}
+
+ \begin{centering}
+  \linespread{1.1}
+  {\Nir@OrgLongName}
+  \vspace{2em}
+
+   \begin{tabular}{p{70mm}p{90mm}}
+    &
+      \Nir@Confirm
+ 
+     \vspace{5mm}
+     \Nir@BossPost
+ 
+     \begin{flushright} \Nir@BossName \end{flushright}
+
+     \Nir@Year.\quad.\quad    
+   \end{tabular}
+\vspace{2em}
+
+\Nir@AnnOtchet \Nir@Otchet
+
+  \vspace{3mm}
+  #1
+  \vspace{3mm}
+
+(шифр~\Nir@StageNo) 
+
+(\Nir@StageType)
+
+\vspace{1em}
+
+    \begin{tabular}{p{100mm}p{60mm}}
+    \Nir@MainBegin \newline
+    \Nir@ManagerPost
+   &
+    ~\newline~\Nir@ManagerName \newline
+  \end{tabular}
+\vspace{2em}
+
+  \Nir@Year
+
+ \end{centering}
+\begin{flushright}
+ На правах рукопису
+\end{flushright} 
+}
+
+
+
+%Эти команды нужно вызвать для корректного определения титульной страницы
+\newcommand\NirStage[3]{\renewcommand\Nir@StageNo{#1}\renewcommand\Nir@StageType{#2}\renewcommand\Nir@StageTitle{#3}}%%virens added: номер госрегистрации
+\newcommand\NirIsAnnotacion[1]{\renewcommand\Nir@AnnOtchet{#1}} %%Если отчёт аннотационный
+\newcommand\NirOrgLongName[1]{\renewcommand\Nir@OrgLongName{#1}}
+\newcommand\NirBoss[2]{\renewcommand\Nir@BossPost{#1}\renewcommand\Nir@BossName{#2}}
+\newcommand\NirYear[1]{\renewcommand\Nir@Year{#1}}
+\newcommand\NirDate[1]{\renewcommand\Nir@Date{#1}}
+\newcommand\NirManager[2]{\renewcommand\Nir@ManagerPost{#1}\renewcommand\Nir@ManagerName{#2}}
+\newcommand\NirTown[1]{\renewcommand\Nir@Town{#1}}%%virens added: указываем город написания отчёта
+\newcommand\NirUdk[1]{\renewcommand\Nir@UdkName{#1}}%%virens added: для изменения УДК в тексте документа
+\newcommand\NirGosNo[1]{\renewcommand\Nir@No{#1}}%%virens added: номер госрегистрации
+
+% Some addonns from 'book' class
+\newcommand\frontmatter{
+ \setcounter{secnumdepth}{-1} 
+}
+%  основная часть
+\newcommand\mainmatter{
+ \setcounter{secnumdepth}{5}
+}
+%  заключение, библиография
+\newcommand\backmatter{
+ \setcounter{secnumdepth}{-1} 
+}
+
+%Styling
+\renewcommand{\rmdefault}{ftm}
+
+%Itemize
+\renewcommand{\labelitemi}{--}
+
+% Set 1. numbering in bibliography
+\makeatletter \renewcommand\@biblabel[1]{#1.} \makeatother
+
+% Set Рисунок and Таблица caption
+\makeatletter
+\renewcommand{\fnum@figure}[1]{Рисунок~\thefigure~--- } % Рисунок 1.4 -- Назва
+\renewcommand{\fnum@table}[1]{Таблиця~\thetable~--- } % for tables if req.
+\makeatother
+
+% Page numbering in the right side of footer
+\RequirePackage{fancyhdr}
+% Redefine default style
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\small \thepage} 
+%\fancyfoot[R]{\thepage} 
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+% Set page style for document
+\pagestyle{plain}
+
+% Chapter and Section tuning
+\RequirePackage{titlesec}
+
+% Section tuning
+\titleformat{\chapter}
+  {\normalfont \centering}
+  {\thechapter~}{0pt}{}
+\titlespacing{\chapter}{0cm}{0em}{3em}
+
+\titleformat{\section}
+  {\normalfont}
+  {\thesection~}{0pt}{}
+\titlespacing{\section}{\parindent}{3em}{3em}
+
+\titleformat{\subsection}
+  {\normalfont}
+  {\thesubsection~}{0pt}{}
+\titlespacing{\subsection}{\parindent}{3em}{3em}
+
+\titleformat{\subsubsection}
+  {\normalfont}
+  {\thesubsubsection~}{0pt}{}
+\titlespacing{\subsubsection}{\parindent}{3em}{3em}
+
+\titleformat{\subsubsubsection}
+  {\normalfont}
+  {\thesubsubsubsection~}{0pt}{}
+\titlespacing{\subsubsubsection}{\parindent}{3em}{3em}
+
+
+% Figure placement tuning
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0}
+\renewcommand{\bottomfraction}{0.95}
+%\renewcommand{\floatpagefraction}{0.35}
+\setcounter{topnumber}{0}
+\setcounter{bottomnumber}{9}
+
+% Add subsubsubsection to contens
+\setcounter{tocdepth}{4}
+
+% Contens tuning
+\RequirePackage[titles]{tocloft}
+\renewcommand{\cftchapfont}{%
+  \normalfont
+}
+\renewcommand{\cftchappagefont}{%
+  \normalfont
+}
+\renewcommand{\cftchapdotsep}{%
+   \cftsecdotsep
+}
+
+\renewcommand{\cftchapleader}{\normalfont\cftdotfill{\cftchapdotsep}}
+
+
+% normal font for ``C.'' in table of contens
+\renewcommand{\cftpartpagefont}{%
+  \normalfont
+}
+
+
+% Настраиваем заголовок таблицы по левому краю
+\makeatletter
+% \setlength\abovecaptionskip{2\p@}
+% \setlength\belowcaptionskip{1\p@}
+
+\def\capfigure{figure}
+\def\captable{table}
+
+\long\def\@makecaption#1#2{%
+%   \vskip\abovecaptionskip
+  \ifx\@captype\capfigure
+      \centering #1~#2 \par
+  \else
+      #1~#2 \par
+  \fi}
+%   \vskip\belowcaptionskip}
+% \renewcommand{\@biblabel}[1]{#1}
+\makeatother

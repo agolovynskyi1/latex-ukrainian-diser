@@ -1,0 +1,141 @@
+\ProvidesPackage{autoreferat}[2010/11/01 v1.00 Package for zvit]
+
+\RequirePackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1cm}
+\geometry{top=2.5cm}
+\geometry{bottom=2.5cm}
+
+\RequirePackage{setspace}
+
+% Paragraph tuning
+\singlespacing 
+
+\parindent=1.2cm
+% Тюнинг абзаца
+\widowpenalty = 500 % отвечает за нежелательность разрыва страницы перед последней строкой абзаца
+\clubpenalty = 500 % отвечает за нежелательность разрыва страницы после первой строки абзаца.
+\pretolerance=500
+\sloppy
+\tolerance=1300 % Tolerate lines with many spaces
+\setlength{\emergencystretch}{3em}
+
+% redefine enumerate, itemize for closer spacing
+\renewenvironment{enumerate}%
+  {\begin{list}{\arabic{enumi}.}%
+     {\topsep=0in\itemsep=0in\parsep=0in\partopsep=0in\usecounter{enumi}
+     \leftmargin=0pt \itemindent=50pt%noindent second line
+     }%
+   }{\end{list}}
+
+\renewenvironment{itemize}%
+  {\begin{list}{-}%
+     {\topsep=0in\itemsep=0in\parsep=0in\partopsep=0in\usecounter{enumi}
+     \leftmargin=0pt \itemindent=\parindent%noindent second line
+     }%
+   }{\end{list}}
+
+% Hypenation tuning
+\hyphenpenalty=100
+\finalhyphendemerits=100
+\uchyph=0 % Запрет переноса слов начинающихся с большой буквы
+
+\addto\captionsukrainian{%список использованных источников
+ \def\refname{%
+ \textbf{ СПИСОК ОПУБЛІКОВАНИХ ПРАЦЬ ЗА ТЕМОЮ ДИСЕРТАЦІЇ}}%
+  \def\contentsname{%
+  ЗМІСТ}%
+}
+
+
+% Some addonns from 'book' class
+\newcommand\frontmatter{
+ \setcounter{secnumdepth}{-1} 
+}
+%  основная часть
+\newcommand\mainmatter{
+ \setcounter{secnumdepth}{5}
+}
+%  заключение, библиография
+\newcommand\backmatter{
+ \setcounter{secnumdepth}{-1} 
+}
+
+\renewcommand{\rmdefault}{ftm}
+
+%Itemize
+\renewcommand{\labelitemi}{--}
+
+% Set 1. numbering in bibliography
+\makeatletter \renewcommand\@biblabel[1]{#1.} \makeatother
+
+% Set Рисунок and Таблица caption
+\makeatletter
+\renewcommand{\fnum@figure}[1]{Рис.~\thefigure. } % Рис. 1. Назва
+\renewcommand{\fnum@table}[1]{Таблиця~\thetable. } % for tables if req. Таблиця 1. Порівняння...
+\makeatother
+
+% Page numbering in the right side of footer
+\RequirePackage{fancyhdr}
+% Redefine default style
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[C]{\small \thepage} 
+%\fancyfoot[R]{\thepage} 
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+% Set page style for document
+\pagestyle{plain}
+
+% Chapter and Section tuning
+\RequirePackage{titlesec}
+
+% Section tuning
+\titleformat{\section}
+  {\normalfont \centering}
+  {\thesection~}{0pt}{}
+\titlespacing{\section}{0cm}{1em}{1em}
+
+\titleformat{\subsection}
+  {\normalfont}
+  {\thesubsection~}{0pt}{}
+\titlespacing{\subsection}{\parindent}{3em}{3em}
+
+\titleformat{\subsubsection}
+  {\normalfont}
+  {\thesubsubsection~}{0pt}{}
+\titlespacing{\subsubsection}{\parindent}{3em}{3em}
+
+\titleformat{\subsubsubsection}
+  {\normalfont}
+  {\thesubsubsubsection~}{0pt}{}
+\titlespacing{\subsubsubsection}{\parindent}{3em}{3em}
+
+% Figure placement tuning
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0}
+\renewcommand{\bottomfraction}{0.95}
+%\renewcommand{\floatpagefraction}{0.35}
+\setcounter{topnumber}{0}
+\setcounter{bottomnumber}{9}
+
+% Add subsubsubsection to contens
+\setcounter{tocdepth}{4}
+
+
+% Настраиваем заголовок таблицы по левому краю
+\makeatletter
+% \setlength\abovecaptionskip{2\p@}
+% \setlength\belowcaptionskip{1\p@}
+
+% В таблиці назва по лівому краю
+\def\capfigure{figure}
+\def\captable{table}
+ 
+\long\def\@makecaption#1#2{%
+\ifx\@captype\capfigure
+   \centering #1~#2 \par
+   \else
+      \centering #1~#2 \par
+   \fi}
+\makeatother
