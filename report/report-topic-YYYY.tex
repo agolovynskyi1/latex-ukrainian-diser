@@ -1,0 +1,181 @@
+\documentclass[a4paper,14pt]{extreport}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ukrainian]{babel}
+
+\usepackage[unicode]{hyperref}
+\hypersetup{colorlinks=false}
+
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{listings}
+\lstset{frame=single,basicstyle=\ttfamily\scriptsize,extendedchars=\true}
+
+\usepackage{amssymb}
+
+\newtheorem{lemma}{Лема}
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Твердження}
+
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+
+\usepackage{zvit}
+
+% for literature
+\usepackage{datetime}
+\renewcommand{\dateseparator}{.}
+% \newcommand{\todayiso}{\twodigit\day \dateseparator \twodigit\month \dateseparator \the\year}
+\newcommand{\todayiso}{1.11.2018}
+
+\begin{document}
+% Need Linux package: scalable-cyrfonts-tex
+\usefont{T2A}{ftm}{m}{n} %%% 
+
+% Add C. to start of contents
+\cftaddtitleline{toc}{part}{}{С.}
+
+\frontmatter %%% <-- вимикаємо нумераці.
+
+% Title page
+\thispagestyle{empty}
+
+\noindent УДК \quad 004.45; 004.2
+
+\noindent \textnumero~держреєстрації 000U0001
+
+% \noindent Інв. \textnumero
+
+
+ \begin{centering}
+  \linespread{1.1}
+  \vspace{1em}
+
+{Національна академія наук України
+
+Інститут ....
+
+1234 м. Київ-123, офіційна адреса, 40, тел. (044) 123-45-67}
+
+  \vspace{1em}
+  
+\begin{tabular}{p{0.45\linewidth}p{0.01\linewidth}p{0.45\linewidth}}
+\noindent ЗАТВЕРДЖУЮ & & \noindent ЗАТВЕРДЖУЮ \\
+%left
+Керівник Програми
+академік НАН України 
+& &
+% Rignt
+академік НАН України
+\\
+
+\rule{0.52\linewidth}{0pt}І.П.~Прізвище  & & \rule{0.52\linewidth}{0pt}І.П.~Прізвище\\
+
+«\quad»\rule{0.35\linewidth}{0pt}20\quadр. & & «\quad»\rule{0.35\linewidth}{0pt}20\quadр.\\
+
+\end{tabular}
+
+
+  \vspace{0.5em}
+
+ЗВІТ ЗА ПРОЕКТОМ
+
+\textbf{«Розвиток шаблона звіту для пакету Latex}
+
+\textbf{для формування звітів згідно з ДСТУ»}
+
+виконаним в рамках цільової комплексної програми 
+
+наукових досліджень НАН України
+
+«Назва програми»
+
+\begin{tabular}{p{0.45\linewidth}p{0.01\linewidth}p{0.45\linewidth}}
+ & & \noindent ЗАТВЕРДЖУЮ \\
+
+& &
+% Rignt
+Директор Інституту Назва \newline
+НАН України
+академік НАН України
+\\
+
+   & & \rule{0.52\linewidth}{0pt}І.П Прізвище\\
+
+  & & «\quad»\rule{0.35\linewidth}{0pt}20\quadр.\\
+
+\end{tabular}
+
+
+\begin{tabular}{p{0.7\linewidth}p{0.25\linewidth}}
+
+Керівник проекту & \\
+Завідувач лабораторії & \\
+кандидат технічних наук & І.П.~Прізвище \\
+
+\end{tabular}
+
+\vspace{3em}
+
+  Київ -- 2018
+  
+% }
+\end{centering}
+
+{\small
+\noindent Рукопис закінчено 02.11.2018 р.
+
+\noindent Матеріали звіту розглянуто та затверджено Вченою радою Інституту
+Назва,
+
+\noindent протокол \textnumero 17 від 24.11.2018~р.
+
+\vspace{1em}
+
+\noindent Координаційна робоча група програми
+}
+% End of Titlepage
+
+
+\input{authors.tex}
+
+\input{referat.tex}
+
+\tableofcontents
+
+\input{abreviations.tex}
+\input{introduction.tex}
+
+\mainmatter %% вмикаємо нумераці.
+
+\input{chapter-example1.tex}
+\input{chapter-example2.tex}
+
+\backmatter
+
+\input{conclusion.tex}
+
+\clearpage
+\addcontentsline{toc}{chapter}{ПЕРЕЛІК ДЖЕРЕЛ ПОСИЛАННЯ}
+\bibliographystyle{gost780}
+\bibliography{literatura}
+
+% enable numbering in appendices
+% \mainmatter
+\appendix
+
+%Fix Cyrillic letters in appendix numbering
+\makeatletter
+% Fix Title format
+\gdef\thechapter{\@Asbuk\c@chapter}
+\makeatother
+\titleformat{\chapter}
+  {\normalfont \centering}
+  {ДОДАТОК~\Asbuk{chapter}~}{0pt}{}
+\titlespacing{\chapter}{0cm}{0em}{3em}
+
+
+\end{document}
